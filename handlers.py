@@ -1,11 +1,11 @@
 from aiogram import Router, F, Bot
-from aiogram.filters import CommandStart, Command
+from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 
-from buttons import first, questions, list_of_questions, number
+from buttons import first, questions, number
 from state import Sign_up
-from text import text_for_answers_2, dict_for_answers
+from text import dict_for_answers
 
 router = Router()
 
@@ -24,7 +24,6 @@ async def reg_name(message: Message, state: FSMContext):
     await state.set_state(Sign_up.phone_number)
     global phone_button
     phone_button = await message.answer('Отправьте свой номер телефона нажав на кнопку:', reply_markup=number)
-
 
 
 @router.message(Sign_up.phone_number, F.contact)
@@ -66,7 +65,7 @@ async def send_text(callback: CallbackQuery):
     # await callback.message.answer(f'{text_for_answers_2[int(callback.data) - 1]}')
     await callback.message.answer(f'{callback.data}:\n{dict_for_answers[callback.data]}')
 
-#
+
 # @router.message(F.text == 'location')
 # async def send_loc(message: Message):
 #     await message.answer_location(latitude=41.877382, longitude=60.526287)

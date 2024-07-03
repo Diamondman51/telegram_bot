@@ -24,4 +24,6 @@ async def questions():
     question_buttons = InlineKeyboardBuilder()
     for question in list_of_questions:
         question_buttons.add(InlineKeyboardButton(text=question, callback_data=question))
+        # TODO test it
+        # question_buttons.button(text=question, callback_data=question)
     return question_buttons.adjust(1).as_markup()
